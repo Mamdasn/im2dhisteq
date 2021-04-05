@@ -1,6 +1,6 @@
 # im2dhisteq
 This module attempts to enhance contrast of a given image by equalizing its two dimensional histogram. An easy way to enhance quality of a given image is to just equalize its histogram, but despite using minimum resources and a very short process time, there are a lot of drawbacks to it.
-One of the ways to tackle drawbacks of `histogram equalization method` is to instead equalize the image's `two dimensional histogram`, as one dimensional histogram of a given image does not contain the image's contextual information. Tests on a database of images has shown When contextual information of an image is taken into account in addition to the image's histogram, output images are significantly better in quality in compare to histogram equalizaion method and a handful of other good methods.  
+One of the ways to tackle drawbacks of `histogram equalization method` is to instead equalize the image's `two dimensional histogram`, as one dimensional histogram of a given image does not contain the image's contextual information. Tests on a multitude of images has shown, taking contextual information of an image in addition to the image's histogram into account when attempting to enhance contrast, outputs images that are significantly better in quality in compare to histogram equalizaion method and a handful of other known methods.  
   
 You can access the article that came up with this method [here](https://www.researchgate.net/publication/256822485_Two-dimensional_histogram_equalization_and_contrast_enhancement).
 
