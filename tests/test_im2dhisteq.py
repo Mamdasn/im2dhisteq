@@ -12,6 +12,7 @@ def test_im2dhisteq_with_param():
     gray_image_2DHisteq = im2dhisteq(gray_image, w_neighboring=6, showProgress = True)
     
 
-    # np.save(f'{image_name}-2D-Histogram-Equalized', gray_image_2DHisteq)
+    #np.save(f'{image_name}-2D-Histogram-Equalized', gray_image_2DHisteq)
     gray_image_2DHisteq_cmpr = np.load(f'{image_name}-2D-Histogram-Equalized.npy')
     assert np.all(gray_image_2DHisteq == gray_image_2DHisteq_cmpr)
+test_im2dhisteq_with_param()
