@@ -50,5 +50,5 @@ if __name__ == '__main__': main()
 ```
 
 ## Showcase
-This is a sample image and its corresponding 2D-Histogram Equalized image
+This is a sample image and its corresponding 2D-Histogram Equalized image.
 ![Plane.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/Original-2DHeq-Images.jpg "Plane.jpg Image")  
