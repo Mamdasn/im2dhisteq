@@ -22,8 +22,13 @@ def im2dhisteq(image, w_neighboring=6, showProgress = True):
     # normalizes CDFx
     CDFxn = (255*CDFx/CDFx[-1]).reshape(-1)
 
+    X_transform = np.zeros((256))
+    X_transform[np.where(V_hist > 0)] = np.insert(np.diff(CDFxn), 0, CDFxn[0])
+    CDFxn_transform = np.cumsum(X_transform).reshape(-1)
+
+
     bins = np.array([i for i in range(0, 256)]).reshape(-1)
     # use linear interpolation of cdf to find new pixel values
-    image_equalized = np.interp(V.flatten(), bins, CDFxn).reshape(h, w).astype(np.uint8)
+    image_equalized = np.floor(np.interp(V.flatten(), bins, CDFxn_transform).reshape(h, w)).astype(np.uint8)
 
     return image_equalized
