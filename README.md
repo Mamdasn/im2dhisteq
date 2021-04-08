@@ -4,7 +4,7 @@ One of the ways to tackle drawbacks of `histogram equalization method` is to ins
   
 You can access the article that came up with this method [here](https://www.researchgate.net/publication/256822485_Two-dimensional_histogram_equalization_and_contrast_enhancement).
 
-## How two dimensional histogram is created
+## How two dimensional histogram is created?
 [Here](https://github.com/Mamdasn/im2dhist) is the source code for the im2dhist python library with a short description on how it's done. 
 
 ## Installation
