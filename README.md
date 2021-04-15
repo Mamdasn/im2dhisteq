@@ -22,7 +22,7 @@ import numpy as np
 import cv2
 from im2dhisteq import im2dhisteq
 
-def imresize(img, wr=200, hr=None): # This is just for imshow-ing images with titles
+def imresize(img, wr=500, hr=None): # This is just for imshow-ing images with titles
     [ h, w] = img.shape
     hr = (h*wr)//w if not hr else hr
     img_resized = cv2.resize(img, dsize=(wr, hr))
