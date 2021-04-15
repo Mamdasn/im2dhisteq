@@ -36,7 +36,7 @@ def main():
     
     # w_neighboring=6 is generally an adequate value, drived by a lot of experimenting.
     # w_neighboring=6 corresponds to a 13*13 square
-    gray_image_2DHisteq = im2dhisteq(gray_image, w_neighboring=6, showProgress = True)
+    gray_image_2DHisteq = im2dhisteq(gray_image, w_neighboring=6)
     
     # This is just for imshow-ing images with titles
     gray_Image_resized = imresize(gray_image)
