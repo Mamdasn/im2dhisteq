@@ -1,14 +1,7 @@
-from im2dhist import im2dhist
+from im2dhist import im2dhist, imhist
 import numpy as np
-import numba
 
-@numba.njit()
-def imhist(arr):
-    hist, _ = np.histogram(arr, bins=256, range=(0, 255))
-    return np.asarray(hist)
-    
-@numba.njit()
-def im2dhisteq(image, w_neighboring=6, showProgress = True):
+def im2dhisteq(image, w_neighboring=6):
     [h, w] = image.shape
     V = image.copy()
     V_hist = imhist(V.reshape(1, -1))
