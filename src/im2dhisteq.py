@@ -4,7 +4,7 @@ import numpy as np
 def im2dhisteq(image, w_neighboring=6):
     [h, w] = image.shape
     V = image.copy()
-    V_hist = imhist(V.reshape(1, -1))
+    V_hist = imhist(V)
 
     H_in = im2dhist(V, w_neighboring=6)
 
@@ -17,6 +17,7 @@ def im2dhisteq(image, w_neighboring=6):
     PDFxn[0] = CDFxn[0]
     PDFxn[1:] = np.diff(CDFxn)
     
+    print(V_hist)
     X_transform = np.zeros((256))
     X_transform[np.where(V_hist > 0)] = PDFxn
     CDFxn_transform = np.cumsum(X_transform).reshape(-1)
