@@ -10,7 +10,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 
 setup(
     name='im2dhisteq',
-    version='0.0.4',
+    version='0.0.6',
     author="mamdasn s",
     author_email="<mamdassn@gmail.com>",
     url="https://github.com/Mamdasn/im2dhisteq",
@@ -22,10 +22,9 @@ setup(
     py_modules=["im2dhisteq"],
     install_requires=[
         "numpy", 
-        "numba", 
         "im2dhist",
         ],
-    keywords=['python', 'histogram', 'imhist', '2dhist', 'hist2d', 'im2dhisteq', 'histogram equalization', 'two dimensional histogram', 'numba'],
+    keywords=['python', 'histogram', 'imhist', '2dhist', 'hist2d', 'im2dhisteq', 'histogram equalization', 'two dimensional histogram'],
     classifiers=[
         "Development Status :: 1 - Planning",
         "Intended Audience :: Science/Research",
