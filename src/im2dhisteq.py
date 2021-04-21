@@ -17,7 +17,6 @@ def im2dhisteq(image, w_neighboring=6):
     PDFxn[0] = CDFxn[0]
     PDFxn[1:] = np.diff(CDFxn)
     
-    print(V_hist)
     X_transform = np.zeros((256))
     X_transform[np.where(V_hist > 0)] = PDFxn
     CDFxn_transform = np.cumsum(X_transform).reshape(-1)
