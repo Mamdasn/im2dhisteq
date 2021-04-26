@@ -50,7 +50,7 @@ if __name__ == '__main__': main()
 ```
 
 ## Showcase
-* A One minute comparative video: https://youtu.be/tX1KbJ2ugdE
+* A one minute comparative video: https://youtu.be/tX1KbJ2ugdE
 * This is a sample image and its corresponding 2D-Histogram Equalized image.
 ![Plane.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/Original-Image.jpg "Plane.jpg Image")  
 ![corresponding 2D-Histogram Equalized image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/2DHeq-Image.jpg "corresponding 2D-Histogram Equalized image")  
