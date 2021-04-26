@@ -1,6 +1,8 @@
 from im2dhist import im2dhist, imhist
 import numpy as np
+import numba 
 
+# @numba.njit()
 def im2dhisteq(image, w_neighboring=6):
     [h, w] = image.shape
     V = image.copy()
@@ -29,7 +31,7 @@ def im2dhisteq(image, w_neighboring=6):
 
     return image_equalized
 
-
+@numba.njit()
 def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
     [h, w] = image.shape
     V = image.copy()
@@ -40,7 +42,7 @@ def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
     CDFx = np.cumsum(np.sum(H_in, axis=0)).reshape(-1, 1) # Kx1
 
     # normalizes CDFx
-    CDFxn = (255*CDFx/CDFx[-1]).reshape(-1)
+    CDFxn = (CDFx/CDFx[-1]).reshape(-1)
 
     PDFxn = np.zeros_like(CDFxn)
     PDFxn[0] = CDFxn[0]
@@ -48,7 +50,7 @@ def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
     
     X_transform = np.zeros((256))
     X_transform[np.where(V_hist > 0)] = PDFxn
-    CDFxn_transform = np.cumsum(X_transform).reshape(-1)
+    CDFxn_transform = np.cumsum(X_transform).copy().reshape(-1)
 
     Win = H_in.shape[0]
     Gmax = 1.5 # 1.5 .. 2
@@ -57,7 +59,7 @@ def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
         Wout = (np.sum(Wout_list)+Wout) / (1+Wout_list.size)
 
     F = V.copy().reshape(-1)
-    Ftilde = Wout * CDFxn_transform[F]/CDFxn_transform[-1]
+    Ftilde = Wout * CDFxn_transform[F]
     
     Madj = np.mean(V) - np.mean(Ftilde)
     Ftilde = Ftilde + Madj
