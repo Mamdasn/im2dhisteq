@@ -29,9 +29,8 @@ def imresize(img, wr=500, hr=None): # This is just for imshow-ing images with ti
     return img_resized
 
 def main():
-    fullname = 'Plane.jpg'
+    fullname = 'cloudy-day.jpg'
     image = cv2.imread(fullname)
-    # convert rgb image to gray
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     
     # w_neighboring=6 is generally an adequate value, drived by a lot of experimenting.
@@ -52,7 +51,5 @@ if __name__ == '__main__': main()
 ## Showcase
 * A one minute comparative video: https://youtu.be/tX1KbJ2ugdE
 * This is a sample image and its corresponding 2d-histogram equalized image.
-![Plane.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/Original-Image.jpg "Plane.jpg Image")  
-![Corresponding 2D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/2DHeq-Image.jpg "corresponding 2D-Histogram Equalized image")  
-Conventional histogram equalized image (for comparison):
-![Corresponding 1D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/Plane-imhisteq.jpg "Corresponding 1D-Histogram Equalized Image")
+![cloudy-day.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/cloudy-day.jpg "cloudy-day.jpg Image")  
+![Corresponding 2D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/cloudy-day-im2dhisteq.jpg "corresponding 2D-Histogram Equalized image")  

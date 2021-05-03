@@ -3,7 +3,9 @@ import numpy as np
 import cv2
 import os
 
+filename = 'assets/cloudy-day.jpg'
 filename = 'assets/Plane.jpg'
+
 name, ext = os.path.splitext(filename)
 image = cv2.imread(filename)
 image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)

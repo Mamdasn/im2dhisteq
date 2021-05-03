@@ -8,7 +8,6 @@ def im2dhisteq(image, w_neighboring=6):
     [h, w] = V.shape
     V_hist = imhist(V)
     H_in = im2dhist(V, w_neighboring=w_neighboring)
-
     CDFx = np.cumsum(np.sum(H_in, axis=0)) # Kx1
 
     # normalizes CDFx
