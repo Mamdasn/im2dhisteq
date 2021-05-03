@@ -53,9 +53,7 @@ if __name__ == '__main__': main()
 * This is a sample image and its corresponding 2d-histogram equalized image.
 Sample Image               |  Equalized Image
 :-------------------------:|:-------------------------:
-![](assets/cloudy-day.jpg) |  ![](assets/cloudy-day-im2dhisteq.jpg)
+![](assets/cloudy-day-500x889.jpg) |  ![](assets/cloudy-day-im2dhisteq-500x889.jpg)
 
-![cloudy-day.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/cloudy-day.jpg "cloudy-day.jpg Image")
-![Corresponding 2D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/cloudy-day-im2dhisteq.jpg "corresponding 2D-Histogram Equalized image")
 
   
