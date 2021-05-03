@@ -51,8 +51,8 @@ if __name__ == '__main__': main()
 
 ## Showcase
 * A one minute comparative video: https://youtu.be/tX1KbJ2ugdE
-* This is a sample image and its corresponding 2D-histogram equalized image.
+* This is a sample image and its corresponding 2d-histogram equalized image.
 ![Plane.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/Original-Image.jpg "Plane.jpg Image")  
 ![Corresponding 2D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/2DHeq-Image.jpg "corresponding 2D-Histogram Equalized image")  
-One dimensional histogram equalized image (for comparison):
+Conventional histogram equalized image (for comparison):
 ![Corresponding 1D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/Plane-imhisteq.jpg "Corresponding 1D-Histogram Equalized Image")
