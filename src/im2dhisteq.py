@@ -2,7 +2,7 @@ from im2dhist import im2dhist, imhist
 import numpy as np
 import numba 
 
-@numba.njit()
+#@numba.njit()
 def im2dhisteq(image, w_neighboring=6):
     V = image.copy()
     [h, w] = V.shape
