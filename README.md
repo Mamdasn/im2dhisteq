@@ -54,5 +54,5 @@ if __name__ == '__main__': main()
 * This is a sample image and its corresponding 2D-histogram equalized image.
 ![Plane.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/Original-Image.jpg "Plane.jpg Image")  
 ![Corresponding 2D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/2DHeq-Image.jpg "corresponding 2D-Histogram Equalized image")  
-one dimensional histogram equalized image (for comparison):
+One dimensional histogram equalized image (for comparison):
 ![Corresponding 1D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/Plane-imhisteq.jpg "Corresponding 1D-Histogram Equalized Image")
