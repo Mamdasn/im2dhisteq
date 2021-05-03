@@ -51,5 +51,5 @@ if __name__ == '__main__': main()
 ## Showcase
 * A one minute comparative video: https://youtu.be/tX1KbJ2ugdE
 * This is a sample image and its corresponding 2d-histogram equalized image.
-![cloudy-day.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/cloudy-day.jpg "cloudy-day.jpg Image")  
+![cloudy-day.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/cloudy-day.jpg "cloudy-day.jpg Image")
 ![Corresponding 2D-Histogram Equalized Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/cloudy-day-im2dhisteq.jpg "corresponding 2D-Histogram Equalized image")  
