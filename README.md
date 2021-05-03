@@ -51,9 +51,7 @@ if __name__ == '__main__': main()
 ## Showcase
 * A one minute comparative video: https://youtu.be/tX1KbJ2ugdE
 * This is a sample image and its corresponding 2d-histogram equalized image.
-Sample Image               |  Equalized Image
-:-------------------------:|:-------------------------:
-![](assets/cloudy-day-500x889.jpg) |  ![](assets/cloudy-day-im2dhisteq-500x889.jpg)
+![](assets/cloudy-day-500x889.jpg) ![](assets/cloudy-day-im2dhisteq-500x889.jpg)
 
 
   
