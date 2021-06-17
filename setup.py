@@ -10,7 +10,7 @@ with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
 
 setup(
     name='im2dhisteq',
-    version='0.0.9',
+    version='0.0.11',
     author="mamdasn s",
     author_email="<mamdassn@gmail.com>",
     url="https://github.com/Mamdasn/im2dhisteq",
@@ -32,5 +32,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.8",
         "Operating System :: OS Independent",
-    ]
+    ],
+    scripts=['bin/im2dhisteq'],
 )

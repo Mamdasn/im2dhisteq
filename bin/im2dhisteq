@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+
+import numpy as np
+import cv2
+import os
+import argparse
+from im2dhisteq import im2dhisteq
+
+
+parser = argparse.ArgumentParser(
+    description=" Pixelate your photos with triangles rather than squares."
+)
+parser.add_argument(
+    '--input',
+    type=str,
+    help='the path to the source image file to be processed',
+    required=True
+)
+parser.add_argument(
+    '--output', type=str, help='the path to the result file', required=True
+)
+parser.add_argument(
+    '--w', type=float, help='width of the square window used for calculating the 2d histogram', required=False
+)
+
+args = parser.parse_args()
+
+# input section
+img_fullname = os.path.realpath(args.input)
+result_fullname = args.output
+width = args.w if args.w else 6
+
+# function section
+image = cv2.imread(img_fullname)
+image_hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+image_v = image_hsv[:, :, 2].copy()
+image_v_2dheq = im2dhisteq(image_v, w_neighboring=width)
+image_hsv[:, :, 2] = image_v_2dheq.copy()
+result = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
+
+
+# write the image into output
+cv2.imwrite(result_fullname, result)
+
