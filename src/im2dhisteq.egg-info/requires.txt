@@ -1,3 +1,0 @@
-numpy
-numba
-im2dhist
