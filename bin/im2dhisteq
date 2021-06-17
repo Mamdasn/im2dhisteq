@@ -20,7 +20,7 @@ parser.add_argument(
     '--output', type=str, help='the path to the result file', required=True
 )
 parser.add_argument(
-    '--w', type=float, help='width of the square window used for calculating the 2d histogram', required=False
+    '--w', type=int, help='width of the square window used for calculating the 2d histogram', required=False
 )
 
 args = parser.parse_args()

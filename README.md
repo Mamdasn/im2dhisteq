@@ -46,6 +46,10 @@ def main():
     cv2.waitKey(0)
 
 if __name__ == '__main__': main()
+```  
+Or  
+```Bash
+im2dhisteq --input 'cloudy-day.jpg' --output 'assets/cloudy-day-2dhisteq.jpg' --w 6
 ```
 
 ## Showcase
