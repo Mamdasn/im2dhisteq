@@ -1,6 +1,6 @@
 from im2dhist import im2dhist, imhist
-import numpy as np
 import numba 
+import numpy as np
 
 @numba.njit()
 def im2dhisteq(image, w_neighboring=6):
