@@ -1,7 +1,6 @@
 from im2dhisteq import im2dhisteq
-from im2dhist import im2dhist
-import cv2
 import numpy as np
+import cv2
 
 def test_im2dhisteq_with_param():
     image_name = '../assets/Plane.jpg'
