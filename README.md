@@ -2,6 +2,8 @@
 [![Package Status](https://img.shields.io/pypi/status/im2dhisteq.svg)](https://pypi.org/project/im2dhisteq/)
 [![Downloads](https://pepy.tech/badge/im2dhisteq)](https://pepy.tech/project/im2dhisteq)
 [![License](https://img.shields.io/pypi/l/im2dhisteq.svg)](https://github.com/Mamdasn/im2dhisteq/blob/main/LICENSE)
+![Repository Size](https://img.shields.io/github/languages/code-size/mamdasn/im2dhisteq)
+
 
 # im2dhisteq
 This module attempts to enhance contrast of a given image by equalizing its two dimensional histogram. An easy way to enhance quality of a given image is to just equalize its histogram, but despite using minimum resources and a very short process time, there are a lot of drawbacks to it.
