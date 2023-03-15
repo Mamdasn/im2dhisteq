@@ -1,3 +1,8 @@
+[![PyPI Latest Release](https://img.shields.io/pypi/v/im2dhisteq.svg)](https://pypi.org/project/im2dhisteq/)
+[![Package Status](https://img.shields.io/pypi/status/im2dhisteq.svg)](https://pypi.org/project/im2dhisteq/)
+[![Downloads](https://pepy.tech/badge/im2dhisteq)](https://pepy.tech/project/im2dhisteq)
+[![License](https://img.shields.io/pypi/l/im2dhisteq.svg)](https://github.com/Mamdasn/im2dhisteq/blob/main/LICENSE)
+
 # im2dhisteq
 This module attempts to enhance contrast of a given image by equalizing its two dimensional histogram. An easy way to enhance quality of a given image is to just equalize its histogram, but despite using minimum resources and a very short process time, there are a lot of drawbacks to it.
 One of the ways to tackle drawbacks of `histogram equalization method` is to instead equalize the image's `two dimensional histogram`, as one dimensional histogram of a given image does not contain the image's contextual information. Tests on a multitude of images has shown, by taking contextual information of an image in addition to the image's histogram into account when attempting to enhance contrast, output images are significantly better in quality in compare to histogram equalizaion and a handful of other known methods.  
