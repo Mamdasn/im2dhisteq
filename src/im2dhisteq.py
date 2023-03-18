@@ -1,4 +1,5 @@
-from im2dhist import im2dhist, imhist
+from im2dhist import im2dhist as im2dhist
+from im2dhist import imhist
 import numba 
 import numpy as np
 
@@ -22,17 +23,17 @@ def im2dhisteq(image, w_neighboring=6):
     CDFxn_transform = np.cumsum(X_transform)
 
 
-    # bins = np.array([i for i in range(0, 256)])
     bins = np.arange(256)
-    # uses linear interpolation of cdf to find new pixel values
+    # use linear interpolation of cdf to find new pixel values
     image_equalized = np.floor(np.interp(V.flatten(), bins, CDFxn_transform).reshape(h, w)).astype(np.uint8)
 
     return image_equalized
 
+
 @numba.njit()
-def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
-    [h, w] = image.shape
-    V = image.copy()
+def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10), dtype=np.uint16)):
+    h, w = image.shape
+    V = image.astype(np.uint16)
     V_hist = imhist(V)
 
     H_in = im2dhist(V, w_neighboring=6)
@@ -45,10 +46,10 @@ def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
     PDFxn = np.zeros_like(CDFxn)
     PDFxn[0] = CDFxn[0]
     PDFxn[1:] = np.diff(CDFxn)
-    
-    X_transform = np.zeros((256))
-    X_transform[np.where(V_hist > 0)] = PDFxn.copy()
-    CDFxn_transform = np.cumsum(X_transform).copy()
+
+    X_transform = np.zeros((256), dtype=np.float64) 
+    X_transform[V_hist > 0] = PDFxn.copy()
+    CDFxn_transform = np.cumsum(X_transform).astype(np.float64)
 
     Win = H_in.shape[0]
     Gmax = 1.5 # 1.5 .. 2
@@ -56,15 +57,13 @@ def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
     if np.where(Wout_list>0)[0].size==Wout_list.size:
         Wout = (np.sum(Wout_list)+Wout) / (1+Wout_list.size)
 
-    F = V.copy().reshape(-1)
+    F = V.ravel().astype(np.uint16)
     Ftilde = Wout * CDFxn_transform[F]
-    
+
     Madj = np.mean(V) - np.mean(Ftilde)
     Ftilde = Ftilde + Madj
 
-    Ftilde = np.where(Ftilde>=0, Ftilde, np.zeros_like(Ftilde))
-    Ftilde = np.where(Ftilde<=255, Ftilde, 255*np.ones_like(Ftilde))
-    Ftilde = Ftilde.astype(np.uint8)
+    Ftilde = np.clip(Ftilde, 0, 255).astype(np.uint8)
 
     image_equalized = Ftilde.reshape(h, w)
 
