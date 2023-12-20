@@ -1,9 +1,9 @@
 from im2dhisteq import im2dhisteq
-import numpy as np 
+import numpy as np
 import cv2
 import os
 
-filename = 'assets/cloudy-day-500.jpg'
+filename = "assets/cloudy-day-500.jpg"
 
 name, ext = os.path.splitext(filename)
 image = cv2.imread(filename)
@@ -19,6 +19,5 @@ image_2dheq = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
 image_hsv[:, :, 2] = image_v_heq.copy()
 image_heq = cv2.cvtColor(image_hsv, cv2.COLOR_HSV2BGR)
 
-cv2.imwrite(f'{name}-im2dhisteq{ext}', image_2dheq)
-cv2.imwrite(f'{name}-imhisteq{ext}', image_heq)
-
+cv2.imwrite(f"{name}-im2dhisteq{ext}", image_2dheq)
+cv2.imwrite(f"{name}-imhisteq{ext}", image_heq)
