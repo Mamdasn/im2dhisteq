@@ -3,43 +3,11 @@ from im2dhist import imhist
 import numba
 import numpy as np
 
-
 @numba.njit()
-def im2dhisteq(image, w_neighboring=6):
-    V = image.copy()
-    [h, w] = V.shape
-    V_hist = imhist(V)
-    H_in = im2dhist(V, w_neighboring=w_neighboring)
-    CDFx = np.cumsum(np.sum(H_in, axis=0))  # Kx1
-
-    # normalizes CDFx
-    CDFxn = 255 * CDFx / CDFx[-1]
-
-    PDFxn = np.zeros_like(CDFxn)
-    PDFxn[0] = CDFxn[0]
-    PDFxn[1:] = np.diff(CDFxn)
-
-    X_transform = np.zeros((256))
-    X_transform[np.where(V_hist > 0)] = PDFxn.copy()
-    CDFxn_transform = np.cumsum(X_transform)
-
-    bins = np.arange(256)
-    # use linear interpolation of cdf to find new pixel values
-    image_equalized = np.floor(
-        np.interp(V.flatten(), bins, CDFxn_transform).reshape(h, w)
-    ).astype(np.uint8)
-
-    return image_equalized
-
-
-@numba.njit()
-def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10), dtype=np.uint16)):
-    h, w = image.shape
-    V = image.astype(np.uint16)
-    V_hist = imhist(V)
-
-    H_in = im2dhist(V, w_neighboring=6)
-
+def transformer(image, w_neighboring=6):
+    [h, w] = image.shape
+    image_hist = imhist(image)
+    H_in = im2dhist(image, w_neighboring=w_neighboring)
     CDFx = np.cumsum(np.sum(H_in, axis=0))  # Kx1
 
     # normalizes CDFx
@@ -49,9 +17,30 @@ def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10), dtype=np.uint16
     PDFxn[0] = CDFxn[0]
     PDFxn[1:] = np.diff(CDFxn)
 
-    X_transform = np.zeros((256), dtype=np.float64)
-    X_transform[V_hist > 0] = PDFxn.copy()
-    CDFxn_transform = np.cumsum(X_transform).astype(np.float64)
+    X_transform = np.zeros((256))
+    X_transform[np.where(image_hist > 0)] = PDFxn.copy()
+    CDFxn_transform = np.cumsum(X_transform)
+    return CDFxn_transform, H_in
+
+@numba.njit()
+def im2dhisteq(image, w_neighboring=6):
+    [h, w] = image.shape
+    V = image.copy()
+    CDFxn_transform, _ = transformer(image, w_neighboring=w_neighboring)
+    bins = np.arange(256)
+    # use linear interpolation of cdf to find new pixel values
+    image_equalized = np.floor(
+        np.interp(V.flatten(), bins, 255*CDFxn_transform).reshape(h, w)
+    ).astype(np.uint8)
+
+    return image_equalized
+
+@numba.njit()
+def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
+    h, w = image.shape
+
+    V = image
+    CDFxn_transform, H_in = transformer(image, w_neighboring=w_neighboring)
 
     Win = H_in.shape[0]
     Gmax = 1.5  # 1.5 .. 2
@@ -65,7 +54,9 @@ def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10), dtype=np.uint16
     Madj = np.mean(V) - np.mean(Ftilde)
     Ftilde = Ftilde + Madj
 
-    Ftilde = np.clip(Ftilde, 0, 255).astype(np.uint8)
+    Ftilde = np.where(Ftilde >= 0, Ftilde, np.zeros_like(Ftilde))
+    Ftilde = np.where(Ftilde <= 255, Ftilde, 255 * np.ones_like(Ftilde))
+    Ftilde = Ftilde.astype(np.uint8)
 
     image_equalized = Ftilde.reshape(h, w)
 
