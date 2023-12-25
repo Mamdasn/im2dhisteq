@@ -5,6 +5,7 @@ import cv2
 import os
 import argparse
 import subprocess
+from tqdm import tqdm
 from im2dhisteq import vid2dhisteq
 
 parser = argparse.ArgumentParser(
@@ -48,34 +49,37 @@ extract_audio(video_address, audio_output)
 
 cap = cv2.VideoCapture(video_address)
 
-i = 0
-j = 0
-length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-Wout_list = np.zeros((10))
-while cap.isOpened():
-    ret, frame = cap.read()
-    if ret == False:
-        break
-    print("\r", 100 * i // length, "%", end="")
+with tqdm(total=total_frames, unit='frame') as pbar:
+    i = 0
+    j = 0
+    length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    Wout_list = np.zeros((10))
+    while cap.isOpened():
+        ret, frame = cap.read()
+        if ret == False:
+            break
+        print("\r", 100 * i // length, "%", end="")
 
-    frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    frame_v = frame_hsv[:, :, 2].copy()
-    image_heq, Wout = vid2dhisteq(frame_v, w_neighboring=width, Wout_list=Wout_list)
-    Wout_list[j] = Wout
-    j += 1
-    if j == 10:
-        j = 0
-    frame_hsv[:, :, 2] = image_heq
-    frame_eq = cv2.cvtColor(frame_hsv, cv2.COLOR_HSV2BGR)
+        frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        frame_v = frame_hsv[:, :, 2].copy()
+        image_heq, Wout = vid2dhisteq(frame_v, w_neighboring=width, Wout_list=Wout_list)
+        Wout_list[j] = Wout
+        j += 1
+        if j == 10:
+            j = 0
+        frame_hsv[:, :, 2] = image_heq
+        frame_eq = cv2.cvtColor(frame_hsv, cv2.COLOR_HSV2BGR)
 
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    if i == 0:
-        h, w, d = frame_frame_eq.shape
-        fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-        video_out = cv2.VideoWriter(frame_eq, fourcc, fps, (w, h))
-    video_out.write(frame_eq)
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        if i == 0:
+            h, w, d = frame_frame_eq.shape
+            fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+            video_out = cv2.VideoWriter(frame_eq, fourcc, fps, (w, h))
+        video_out.write(frame_eq)
 
-    i += 1
+        i += 1
+        pbar.update(1)
+
 cv2.destroyAllWindows()
 
 add_audio(video_output, audio_output, video_output_audio)
