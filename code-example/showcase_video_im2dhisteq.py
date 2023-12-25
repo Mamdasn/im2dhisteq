@@ -6,7 +6,7 @@ cap = cv2.VideoCapture("assets/Arctic-Convoy-With-Giant-Mack-Trucks.mp4")
 
 # video without sound
 video_out_name = (
-    "assets/Arctic-Convoy-With-Giant-Mack-Trucks-imWeightedThresholdedheq.mp4"
+    "assets/Arctic-Convoy-With-Giant-Mack-Trucks-im2dhisteq.mp4"
 )
 
 i = 0
