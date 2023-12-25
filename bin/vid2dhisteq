@@ -38,11 +38,11 @@ width = args.w if args.w else 6
 # function section
 
 def extract_audio(video_file, audio_file):
-    command = ['ffmpeg', '-hide_banner', '-i', video_file, '-q:a', '0', '-map', 'a', audio_file]
+    command = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-i', video_file, '-q:a', '0', '-map', 'a', audio_file]
     subprocess.run(command, check=True)
 
 def add_audio(video_file, audio_file, output_file):
-    command = ['ffmpeg', '-hide_banner', '-i', video_file, '-i', audio_file, '-c', 'copy', '-map', '0:v:0', '-map', '1:a:0', output_file]
+    command = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-i', video_file, '-i', audio_file, '-c', 'copy', '-map', '0:v:0', '-map', '1:a:0', output_file]
     subprocess.run(command, check=True)
 
 extract_audio(video_address, audio_output)
@@ -81,5 +81,8 @@ with tqdm(total=total_frames, unit='frame') as pbar:
         pbar.update(1)
 
 cv2.destroyAllWindows()
+# Release resources
+cap.release()
+video_out.release()
 
 add_audio(video_output, audio_output, video_output_audio)
