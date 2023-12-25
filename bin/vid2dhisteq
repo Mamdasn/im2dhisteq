@@ -69,34 +69,13 @@ while cap.isOpened():
     frame_eq = cv2.cvtColor(frame_hsv, cv2.COLOR_HSV2BGR)
 
     fps = cap.get(cv2.CAP_PROP_FPS)
-    frame = cv2.putText(
-        frame,
-        "Original",
-        (10, 20),
-        cv2.FONT_HERSHEY_COMPLEX,
-        0.5,
-        (255, 255, 255),
-        1,
-        cv2.LINE_AA,
-    )
-    frame_eq = cv2.putText(
-        frame_eq,
-        "Enhanced",
-        (10, 20),
-        cv2.FONT_HERSHEY_COMPLEX,
-        0.5,
-        (255, 255, 255),
-        1,
-        cv2.LINE_AA,
-    )
-    frame_frame_eq = np.concatenate((frame, frame_eq), axis=1)
     if i == 0:
         h, w, d = frame_frame_eq.shape
         fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-        video_out = cv2.VideoWriter(video_output, fourcc, fps, (w, h))
-    video_out.write(frame_frame_eq)
+        video_out = cv2.VideoWriter(frame_eq, fourcc, fps, (w, h))
+    video_out.write(frame_eq)
 
     i += 1
 cv2.destroyAllWindows()
 
-add_audio(video_output_audio, audio_output)
+add_audio(video_output, audio_output, video_output_audio)
