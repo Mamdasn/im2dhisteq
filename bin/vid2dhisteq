@@ -45,9 +45,10 @@ def add_audio(video_file, audio_file, output_file):
     command = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-i', video_file, '-i', audio_file, '-c', 'copy', '-map', '0:v:0', '-map', '1:a:0', output_file]
     subprocess.run(command, check=True)
 
-extract_audio(video_address, audio_output)
-
 cap = cv2.VideoCapture(video_address)
+
+# Get the total number of frames in the video
+total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
 
 with tqdm(total=total_frames, unit='frame') as pbar:
     i = 0
@@ -58,23 +59,21 @@ with tqdm(total=total_frames, unit='frame') as pbar:
         ret, frame = cap.read()
         if ret == False:
             break
-        print("\r", 100 * i // length, "%", end="")
+        #print("\r", 100 * i // length, "%", end="")
 
         frame_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         frame_v = frame_hsv[:, :, 2].copy()
         image_heq, Wout = vid2dhisteq(frame_v, w_neighboring=width, Wout_list=Wout_list)
         Wout_list[j] = Wout
-        j += 1
-        if j == 10:
-            j = 0
+        j = (j + 1) % 10  # This will automatically loop j from 0 to 9
         frame_hsv[:, :, 2] = image_heq
         frame_eq = cv2.cvtColor(frame_hsv, cv2.COLOR_HSV2BGR)
 
         fps = cap.get(cv2.CAP_PROP_FPS)
         if i == 0:
-            h, w, d = frame_frame_eq.shape
+            h, w, d = frame_eq.shape
             fourcc = cv2.VideoWriter_fourcc(*"mp4v")
-            video_out = cv2.VideoWriter(frame_eq, fourcc, fps, (w, h))
+            video_out = cv2.VideoWriter(video_output, fourcc, fps, (w, h))
         video_out.write(frame_eq)
 
         i += 1
@@ -85,4 +84,5 @@ cv2.destroyAllWindows()
 cap.release()
 video_out.release()
 
+extract_audio(video_address, audio_output)
 add_audio(video_output, audio_output, video_output_audio)
