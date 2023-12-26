@@ -60,6 +60,6 @@ if __name__ == '__main__': main()
 ```
 
 ## Showcase
-* A one minute comparative video: https://youtu.be/gdCk_z5hAcs
+* A one minute comparative video: https://youtu.be/7LrzX2ZpLAQ
 * This is a sample image and its corresponding 2d-histogram equalized image.
 ![cloudy-day-original-im2dhisteq.jpg Image](https://raw.githubusercontent.com/Mamdasn/im2dhisteq/main/assets/cloudy-day-original-im2dhisteq.jpg "cloudy-day-original-im2dhisteq.jpg Image")
