@@ -19,8 +19,13 @@ pip install im2dhisteq
 
 ## Usage
 
+For images
 ```Bash
 im2dhisteq --input 'cloudy-day.jpg' --output 'assets/cloudy-day-2dhisteq.jpg' --w 6
+```
+For videos
+```Bash
+vid2dhisteq --input 'video-input.mp4' --output 'video-output-enhanced.mp4' --w 6
 ```
 Or
 ```python
