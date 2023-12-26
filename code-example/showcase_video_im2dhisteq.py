@@ -5,9 +5,7 @@ from im2dhisteq import vid2dhisteq
 cap = cv2.VideoCapture("assets/Arctic-Convoy-With-Giant-Mack-Trucks.mp4")
 
 # video without sound
-video_out_name = (
-    "assets/Arctic-Convoy-With-Giant-Mack-Trucks-im2dhisteq.mp4"
-)
+video_out_name = "assets/Arctic-Convoy-With-Giant-Mack-Trucks-im2dhisteq.mp4"
 
 i = 0
 j = 0

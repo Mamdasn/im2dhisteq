@@ -3,6 +3,7 @@ from im2dhist import imhist
 import numba
 import numpy as np
 
+
 @numba.njit()
 def transformer(image, w_neighboring=6):
     [h, w] = image.shape
@@ -22,6 +23,7 @@ def transformer(image, w_neighboring=6):
     CDFxn_transform = np.cumsum(X_transform)
     return CDFxn_transform, H_in
 
+
 @numba.njit()
 def im2dhisteq(image, w_neighboring=6):
     [h, w] = image.shape
@@ -30,10 +32,11 @@ def im2dhisteq(image, w_neighboring=6):
     bins = np.arange(256)
     # use linear interpolation of cdf to find new pixel values
     image_equalized = np.floor(
-        np.interp(V.flatten(), bins, 255*CDFxn_transform).reshape(h, w)
+        np.interp(V.flatten(), bins, 255 * CDFxn_transform).reshape(h, w)
     ).astype(np.uint8)
 
     return image_equalized
+
 
 @numba.njit()
 def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
