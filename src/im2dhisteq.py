@@ -2,13 +2,24 @@ from im2dhist import im2dhist as im2dhist
 from im2dhist import imhist
 import numba
 import numpy as np
+import sys
+import os
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+go_libs_path = os.path.join(parent_dir, 'go_libs')
+sys.path.append(go_libs_path)
 
-@numba.njit()
+import go_lib
+
 def transformer(image, w_neighboring=6):
     [h, w] = image.shape
-    image_hist = imhist(image)
-    H_in = im2dhist(image, w_neighboring=w_neighboring)
+    #image_hist = imhist(image)
+    image_hist = go_lib.get_imhist(image)
+
+    #H_in = im2dhist(image, w_neighboring=w_neighboring)
+    H_in = go_lib.get_twodhist(image, w=w_neighboring)
+
     CDFx = np.cumsum(np.sum(H_in, axis=0))  # Kx1
 
     # normalizes CDFx
@@ -24,7 +35,6 @@ def transformer(image, w_neighboring=6):
     return CDFxn_transform, H_in
 
 
-@numba.njit()
 def im2dhisteq(image, w_neighboring=6):
     [h, w] = image.shape
     V = image.copy()
@@ -38,7 +48,6 @@ def im2dhisteq(image, w_neighboring=6):
     return image_equalized
 
 
-@numba.njit()
 def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
     h, w = image.shape
 
