@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 import os
 
-filename = "assets/cloudy-day-500.jpg"
+filename = "assets/cloudy-day.jpg"
 
 name, ext = os.path.splitext(filename)
 image = cv2.imread(filename)
