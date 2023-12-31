@@ -11,8 +11,8 @@ __pycache__/
 *$py.class
 
 # Go temp files
-go_libs/go.mod
-go_libs/go.sum
+src/go_libs/go.mod
+src/go_libs/go.sum
 
 # C extensions
 *.so
