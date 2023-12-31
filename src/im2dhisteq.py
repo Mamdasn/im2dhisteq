@@ -5,12 +5,7 @@ import numpy as np
 import sys
 import os
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-go_libs_path = os.path.join(parent_dir, 'go_libs')
-sys.path.append(go_libs_path)
-
-import go_lib
+from go_libs import go_lib
 
 def transformer(image, w_neighboring=6):
     [h, w] = image.shape
