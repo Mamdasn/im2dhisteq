@@ -1,19 +1,24 @@
-from im2dhist import im2dhist as im2dhist
-from im2dhist import imhist
 import numba
 import numpy as np
 import sys
 import os
 
-from go_libs import go_lib
+file_path = os.path.realpath(__file__)
+src_dir = os.path.dirname(file_path)
+library_path = os.path.join(src_dir, 'go_libs', 'library.so')
+if os.path.exists(library_path):
+    from go_libs import go_lib
+    im2dhist = go_lib.get_twodhist_parallel
+    imhist = go_lib.get_imhist
+else:
+    from im2dhist import im2dhist as im2dhist
+    from im2dhist import imhist
 
 def transformer(image, w_neighboring=6):
     [h, w] = image.shape
-    #image_hist = imhist(image)
-    image_hist = go_lib.get_imhist(image)
+    image_hist = imhist(image)
 
-    #H_in = im2dhist(image, w_neighboring=w_neighboring)
-    H_in = go_lib.get_twodhist(image, w=w_neighboring)
+    H_in = im2dhist(image, w_neighboring)
 
     CDFx = np.cumsum(np.sum(H_in, axis=0))  # Kx1
 
