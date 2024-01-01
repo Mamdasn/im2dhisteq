@@ -28,7 +28,12 @@ For videos
 vid2dhisteq --input 'video-input.mp4' --output 'video-output-enhanced.mp4' --w 6
 ```
 ### Speed up
-The speed of the program can be significantly increased if the go library `lib-im2dhist.go` in src/go_libs in the package is compiled and moved to a dir in the system path. To compile, simply install `go` and then run the script `make-library`.
+The speed of the program can be significantly increased if the go library `lib-im2dhist.go` in src/go_libs in the package is compiled and moved to a dir in the system path. To compile, simply install `go`. Then run
+```Bash
+go mod init lib-im2dhist.go
+go mod tidy
+```
+followed by running the script `make-library`.
 
 ## Showcase
 * A one minute comparative video: https://youtu.be/7LrzX2ZpLAQ
