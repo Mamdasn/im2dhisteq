@@ -8,23 +8,38 @@ file_path = os.path.realpath(__file__)
 dll_dir = os.path.dirname(file_path)
 
 # Load the shared library
-library = ctypes.CDLL(os.path.join(dll_dir, 'library.so'))
+library = ctypes.CDLL(os.path.join(dll_dir, "library.so"))
 
 # Set up the function return and argument types
 library.im2dhist_file.argtypes = [ctypes.c_char_p]
 library.im2dhist_file.restype = ctypes.POINTER(ctypes.c_uint32 * 65536)
 
-library.im2dhist_data.argtypes = [ctypes.POINTER(ctypes.c_uint8), ctypes.c_int, ctypes.c_int, ctypes.c_int]
+library.im2dhist_data.argtypes = [
+    ctypes.POINTER(ctypes.c_uint8),
+    ctypes.c_int,
+    ctypes.c_int,
+    ctypes.c_int,
+]
 library.im2dhist_data.restype = ctypes.POINTER(ctypes.c_uint * 65536)
 
-library.im2dhist_data_parallel.argtypes = [ctypes.POINTER(ctypes.c_uint8), ctypes.c_int, ctypes.c_int, ctypes.c_int]
+library.im2dhist_data_parallel.argtypes = [
+    ctypes.POINTER(ctypes.c_uint8),
+    ctypes.c_int,
+    ctypes.c_int,
+    ctypes.c_int,
+]
 library.im2dhist_data_parallel.restype = ctypes.POINTER(ctypes.c_uint * 65536)
 
-library.imhist_data.argtypes = [ctypes.POINTER(ctypes.c_uint8), ctypes.c_int, ctypes.c_int]
+library.imhist_data.argtypes = [
+    ctypes.POINTER(ctypes.c_uint8),
+    ctypes.c_int,
+    ctypes.c_int,
+]
 library.imhist_data.restype = ctypes.POINTER(ctypes.c_uint * 256)
 
+
 def get_twodhist_file(im_addr):
-    arg = im_addr.encode('utf-8')
+    arg = im_addr.encode("utf-8")
     data_ptr = library.im2dhist_file(arg)
 
     # Dereference the pointer and convert to a numpy array
@@ -36,6 +51,7 @@ def get_twodhist_file(im_addr):
 
     library.freeMemory(data_ptr)
     return twodhist
+
 
 def get_twodhist(layer, w=1):
     shape_of_layer = layer.shape
@@ -54,6 +70,7 @@ def get_twodhist(layer, w=1):
 
     library.freeMemory(data_ptr)
     return twodhist
+
 
 def get_twodhist_parallel(layer, w=1):
     shape_of_layer = layer.shape
