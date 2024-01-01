@@ -1,12 +1,9 @@
 import numba
 import numpy as np
-import sys
-import os
+from go_libs import dll_path_finder
 
-file_path = os.path.realpath(__file__)
-src_dir = os.path.dirname(file_path)
-library_path = os.path.join(src_dir, "go_libs", "library.so")
-if os.path.exists(library_path):
+
+if dll_path_finder.get_dll_path():
     from go_libs import go_lib
 
     im2dhist = go_lib.get_twodhist_parallel

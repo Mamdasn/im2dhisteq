@@ -1,14 +1,9 @@
 import ctypes
 import numpy as np
-import cv2
-
-import os
-
-file_path = os.path.realpath(__file__)
-dll_dir = os.path.dirname(file_path)
+from .dll_path_finder import get_dll_path
 
 # Load the shared library
-library = ctypes.CDLL(os.path.join(dll_dir, "library.so"))
+library = ctypes.CDLL(get_dll_path())
 
 # Set up the function return and argument types
 library.im2dhist_file.argtypes = [ctypes.c_char_p]
