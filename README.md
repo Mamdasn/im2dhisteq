@@ -27,37 +27,7 @@ For videos
 ```Bash
 vid2dhisteq --input 'video-input.mp4' --output 'video-output-enhanced.mp4' --w 6
 ```
-Or
-```python
-import numpy as np
-import cv2
-from im2dhisteq import im2dhisteq
-
-def imresize(img, wr=500, hr=None): # This is just for imshow-ing images with titles
-    [ h, w] = img.shape
-    hr = (h*wr)//w if not hr else hr
-    img_resized = cv2.resize(img, dsize=(wr, hr))
-    return img_resized
-
-def main():
-    fullname = 'cloudy-day.jpg'
-    image = cv2.imread(fullname)
-    gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-
-    # w_neighboring=6 is generally an adequate value, drived by a lot of experimenting.
-    # w_neighboring=6 corresponds to a 13*13 square
-    gray_image_2DHisteq = im2dhisteq(gray_image, w_neighboring=6)
-
-    # This is just for imshow-ing images with titles
-    gray_Image_resized = imresize(gray_image)
-    gray_Image_2DHisteq_resized = imresize(gray_image_2DHisteq)
-
-    cv2.imshow('Original Image', gray_Image_resized)
-    cv2.imshow('2DHeq Image', gray_Image_2DHisteq_resized)
-    cv2.waitKey(0)
-
-if __name__ == '__main__': main()
-```
+The speed of the program can be significantly increased if the go library `lib-im2dhist.go` in src/go_libs in the package is compiled and moved to a dir in the system path. To compile, simply install `go` and then run the script `make-library`.
 
 ## Showcase
 * A one minute comparative video: https://youtu.be/7LrzX2ZpLAQ
