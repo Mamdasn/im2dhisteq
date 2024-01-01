@@ -10,7 +10,7 @@ with codecs.open(os.path.join(parent_dir, "README.md"), encoding="utf-8") as rea
 
 setup(
     name="im2dhisteq",
-    version="1.0.9",
+    version="1.0.10",
     author="mamdasn s",
     author_email="<mamdassn@gmail.com>",
     url="https://github.com/Mamdasn/im2dhisteq",
