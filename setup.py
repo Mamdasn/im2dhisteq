@@ -19,6 +19,7 @@ setup(
     long_description_content_type="text/markdown",
     include_package_data=True,
     package_dir={"": "src"},
+    packages=find_packages(where='src'),
     py_modules=["im2dhisteq"],
     install_requires=[
         "numpy",
