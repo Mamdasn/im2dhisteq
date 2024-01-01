@@ -4,10 +4,8 @@ from go_libs import dll_path_finder
 
 
 if dll_path_finder.get_dll_path():
-    from go_libs import go_lib
-
-    im2dhist = go_lib.get_twodhist_parallel
-    imhist = go_lib.get_imhist
+    from go_libs import get_twodhist_parallel as im2dhist
+    from go_libs import get_imhist as imhist
 else:
     from im2dhist import im2dhist as im2dhist
     from im2dhist import imhist
