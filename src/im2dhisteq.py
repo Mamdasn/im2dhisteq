@@ -5,14 +5,16 @@ import os
 
 file_path = os.path.realpath(__file__)
 src_dir = os.path.dirname(file_path)
-library_path = os.path.join(src_dir, 'go_libs', 'library.so')
+library_path = os.path.join(src_dir, "go_libs", "library.so")
 if os.path.exists(library_path):
     from go_libs import go_lib
+
     im2dhist = go_lib.get_twodhist_parallel
     imhist = go_lib.get_imhist
 else:
     from im2dhist import im2dhist as im2dhist
     from im2dhist import imhist
+
 
 def transformer(image, w_neighboring=6):
     [h, w] = image.shape
@@ -48,28 +50,49 @@ def im2dhisteq(image, w_neighboring=6):
     return image_equalized
 
 
-def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
+@numba.njit()
+def apply_transformer_and_mean_brightness(image, H_in, Wout_list, CDFxn_transform):
     h, w = image.shape
-
-    V = image
-    CDFxn_transform, H_in = transformer(image, w_neighboring=w_neighboring)
-
     Win = H_in.shape[0]
     Gmax = 1.5  # 1.5 .. 2
     Wout = min(255, Gmax * Win)
-    if np.where(Wout_list > 0)[0].size == Wout_list.size:
-        Wout = (np.sum(Wout_list) + Wout) / (1 + Wout_list.size)
 
-    F = V.ravel().astype(np.uint16)
-    Ftilde = Wout * CDFxn_transform[F]
+    if np.all(Wout_list > 0):
+        Wout = (np.sum(Wout_list) + Wout) / (Wout_list.size + 1)
 
-    Madj = np.mean(V) - np.mean(Ftilde)
-    Ftilde = Ftilde + Madj
+    F = image.ravel().astype(np.uint16)
+    Ftilde = np.empty_like(F, dtype=np.float32)
 
-    Ftilde = np.where(Ftilde >= 0, Ftilde, np.zeros_like(Ftilde))
-    Ftilde = np.where(Ftilde <= 255, Ftilde, 255 * np.ones_like(Ftilde))
-    Ftilde = Ftilde.astype(np.uint8)
+    for i in range(F.size):
+        Ftilde[i] = Wout * CDFxn_transform[F[i]]
 
-    image_equalized = Ftilde.reshape(h, w)
+    sum_image = 0.0
+    sum_Ftilde = 0.0
+    for i in range(F.size):
+        sum_image += image.ravel()[i]
+        sum_Ftilde += Ftilde[i]
+
+    mean_image = sum_image / F.size
+    mean_Ftilde = sum_Ftilde / F.size
+
+    Madj = mean_image - mean_Ftilde
+
+    for i in range(Ftilde.size):
+        Ftilde[i] = Ftilde[i] + Madj
+        if Ftilde[i] < 0:
+            Ftilde[i] = 0
+        elif Ftilde[i] > 255:
+            Ftilde[i] = 255
+
+    image_equalized = Ftilde.astype(np.uint8).reshape(h, w)
+
+    return image_equalized, Wout
+
+
+def vid2dhisteq(image, w_neighboring=6, Wout_list=np.zeros((10))):
+    CDFxn_transform, H_in = transformer(image, w_neighboring=w_neighboring)
+    image_equalized, Wout = apply_transformer_and_mean_brightness(
+        image, H_in, Wout_list, CDFxn_transform
+    )
 
     return image_equalized, Wout
