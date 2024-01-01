@@ -11,11 +11,14 @@ __pycache__/
 *$py.class
 
 # Go temp files
-src/go_libs/go.mod
-src/go_libs/go.sum
+*go.mod
+*go.sum
 
 # C extensions
 *.so
+*.dylib
+*.dll
+/src/go_libs/compiled-libs/*.h
 
 # Distribution / packaging
 .Python
