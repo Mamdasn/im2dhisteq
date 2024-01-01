@@ -38,8 +38,6 @@ def get_dll_in_sys_path(library_name):
         if os.path.exists(library_path):
             return library_path
 
-    return None
-
 
 def get_dll_path():
     dll_path = None
@@ -52,4 +50,6 @@ def get_dll_path():
         dll_dir = os.path.join(src_dir, "compiled-libs")
         dll_path = os.path.join(dll_dir, dll_name)
 
-    return dll_path
+    if os.path.exists(dll_path):
+        return dll_path
+    return None
