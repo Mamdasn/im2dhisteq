@@ -2,7 +2,6 @@ import numba
 import numpy as np
 from go_libs import dll_path_finder
 
-
 if dll_path_finder.get_dll_path():
     from go_libs import get_twodhist_parallel as im2dhist
     from go_libs import get_imhist as imhist
