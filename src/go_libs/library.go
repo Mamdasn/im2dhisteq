@@ -60,6 +60,24 @@ func im2dhist_data(data *byte, width, height int, w int) *C.uint32_t {
     return (*C.uint32_t)(cArray)
 }
 
+//export im2dhist_data_parallel
+func im2dhist_data_parallel(data *byte, width, height int, w int) *C.uint32_t {
+
+    layer := byte2Gray(data, width, height)
+
+    twodhist := im2dhistgo.Im2dhist_parallel(layer, w)
+
+    // Allocate memory for the array in C
+    cArray := C.malloc(C.size_t(len(twodhist)) * C.size_t(unsafe.Sizeof(C.uint32_t(0))))
+    cArrayPtr := (*[65536]C.uint32_t)(cArray)
+
+    // Copy Go array to C array
+    for i, v := range twodhist {
+        cArrayPtr[i] = C.uint32_t(v)
+    }
+
+    return (*C.uint32_t)(cArray)
+}
 
 //export imhist_data
 func imhist_data(data *byte, width, height int) *C.uint32_t {

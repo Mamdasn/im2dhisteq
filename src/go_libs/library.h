@@ -82,6 +82,7 @@ extern "C" {
 
 extern uint32_t* im2dhist_file(char* arg);
 extern uint32_t* im2dhist_data(GoUint8* data, GoInt width, GoInt height, GoInt w);
+extern uint32_t* im2dhist_data_parallel(GoUint8* data, GoInt width, GoInt height, GoInt w);
 extern uint32_t* imhist_data(GoUint8* data, GoInt width, GoInt height);
 extern void freeMemory(void* ptr);
 
