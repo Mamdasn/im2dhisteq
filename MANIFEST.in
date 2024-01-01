@@ -1,7 +1,7 @@
 include *.in
 include *.txt
 include LICENSE
-recursive-include assets *.jpg
-recursive-include assets *.npy
+include src/go_libs/make-library
 recursive-include src *.py
+recursive-include src *.go
 recursive-include tests *.py
