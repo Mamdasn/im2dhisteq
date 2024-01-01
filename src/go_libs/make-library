@@ -1,1 +1,48 @@
-go build -o library.so -buildmode=c-shared library.go
+#!/bin/sh
+
+os=''
+arch=''
+
+# linux builds
+os='linux'
+
+arch='amd64'
+echo Building lib-im2dhist-$os-$arch.so
+GOOS=linux GOARCH=amd64 go build -o compiled-libs/lib-im2dhist-$os-$arch.so -buildmode=c-shared lib-im2dhist.go &&
+	echo Done
+arch='arm64'
+echo Building lib-im2dhist-$os-$arch.so
+GOOS=linux GOARCH=arm64 go build -o compiled-libs/lib-im2dhist-$os-$arch.so -buildmode=c-shared lib-im2dhist.go &&
+	echo Done
+arch='arm'
+echo Building lib-im2dhist-$os-$arch.so
+GOOS=linux GOARCH=arm GOARM=6 go build -o compiled-libs/lib-im2dhist-$os-$arch.so -buildmode=c-shared lib-im2dhist.go &&
+	echo Done
+arch='386'
+echo Building lib-im2dhist-$os-$arch.so
+GOOS=linux GOARCH=386 go build -o compiled-libs/lib-im2dhist-$os-$arch.so -buildmode=c-shared lib-im2dhist.go &&
+	echo Done
+
+# windows builds
+os='windows'
+
+arch='amd64'
+echo Building lib-im2dhist-$os-$arch.dll
+GOOS=windows GOARCH=amd64 go build -o compiled-libs/lib-im2dhist-$os-$arch.dll -buildmode=c-shared lib-im2dhist.go &&
+	echo Done
+arch='386'
+echo Building lib-im2dhist-$os-$arch.dll
+GOOS=windows GOARCH=386 go build -o compiled-libs/lib-im2dhist-$os-$arch.dll -buildmode=c-shared lib-im2dhist.go &&
+	echo Done
+
+# macos builds
+os='darwin'
+
+arch='amd64'
+echo Building lib-im2dhist-$os-$arch.dylib
+GOOS=darwin GOARCH=amd64 go build -o compiled-libs/lib-im2dhist-$os-$arch.dylib -buildmode=c-shared lib-im2dhist.go &&
+	echo Done
+arch='arm64'
+echo Building lib-im2dhist-$os-$arch.dylib
+GOOS=darwin GOARCH=arm64 go build -o compiled-libs/lib-im2dhist-$os-$arch.dylib -buildmode=c-shared lib-im2dhist.go &&
+	echo Done
