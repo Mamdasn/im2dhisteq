@@ -11,7 +11,7 @@ __pycache__/
 *$py.class
 
 # Go temp files
-*go.mod
+#*go.mod
 *go.sum
 
 # C extensions
