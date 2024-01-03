@@ -37,7 +37,7 @@ go mod tidy
 followed by running the script `make-library`.
 
 #### Download binary
-Instead of compiling the go library `lib-im2dhist.go`, you can download the specific library based on your system's hardware configuration:
+Instead of compiling the go library `lib-im2dhist.go`, you can download the library based on your system configuration:
 * [lib-im2dhist-linux-amd64.so](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-linux-amd64.so)
 * [lib-im2dhist-linux-arm64.so](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-linux-arm64.so)
 * [lib-im2dhist-linux-arm.so](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-linux-arm.so)
