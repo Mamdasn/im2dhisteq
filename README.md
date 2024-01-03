@@ -28,12 +28,27 @@ For videos
 vid2dhisteq --input 'video-input.mp4' --output 'video-output-enhanced.mp4' --w 6
 ```
 ### Speed up
-The speed of the program can be significantly increased if the go library `lib-im2dhist.go` in src/go_libs in the package is compiled and moved to a dir in the system path. To compile, simply install `go`. Then run
+The speed of the program can be significantly increased if the go library `lib-im2dhist.go` in src/go_libs in the package is compiled and moved to a dir in the system path.
+To compile, first make sure `go` is installed on your system. Then run
 ```Bash
 go mod init lib-im2dhist.go
 go mod tidy
 ```
 followed by running the script `make-library`.
+
+#### Download binary
+Instead of compiling the go library `lib-im2dhist.go`, you can download the specific library based on your system's hardware configuration:
+##### Linux builds
+![lib-im2dhist-linux-amd64.so](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-linux-amd64.so)
+![lib-im2dhist-linux-arm64.so](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-linux-arm64.so)
+![lib-im2dhist-linux-arm.so](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-linux-arm.so)
+![lib-im2dhist-linux-386.so](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-linux-386.so)
+##### Windows builds
+![lib-im2dhist-windows-amd64.dll](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-windows-amd64.dll)
+![lib-im2dhist-windows-386.dll](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-windows-386.dll)
+##### Mac OS builds
+![lib-im2dhist-darwin-amd64.dylib](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-darwin-amd64.dylib)
+![lib-im2dhist-darwin-arm64.dylib](https://github.com/Mamdasn/im2dhisteq/releases/download/v1.0.12/lib-im2dhist-darwin-arm64.dylib)
 
 ## Showcase
 * A one minute comparative video: https://youtu.be/7LrzX2ZpLAQ
