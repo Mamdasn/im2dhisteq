@@ -9,29 +9,23 @@ export CGO_ENABLED=1
 # Linux builds
 export GOOS=linux
 
-export CC=x86_64-linux-musl-gcc
 export GOARCH=amd64
 echo Building lib-im2dhist-$GOOS-$GOARCH.so
 go build -o compiled-libs/lib-im2dhist-$GOOS-$GOARCH.so -buildmode=c-shared lib-im2dhist.go &&
 	echo Done
-export CC=
 echo
 
-export CC=aarch64-linux-musl-gcc
 export GOARCH=arm64
 echo Building lib-im2dhist-$GOOS-$GOARCH.so
 go build -o compiled-libs/lib-im2dhist-$GOOS-$GOARCH.so -buildmode=c-shared lib-im2dhist.go &&
     echo Done
-export CC=
 echo
 
 export GOARCH=arm
 export GOARM=6
-export CC=arm-linux-gnueabi-gcc
 echo Building lib-im2dhist-$GOOS-$GOARCH.so
 go build -o compiled-libs/lib-im2dhist-$GOOS-$GOARCH.so -buildmode=c-shared lib-im2dhist.go &&
     echo Done
-export CC=
 echo
 
 export GOARCH=386
@@ -43,20 +37,16 @@ echo
 # Windows builds
 export GOOS=windows
 
-export CC=x86_64-w64-mingw32-gcc
 export GOARCH=amd64
 echo Building lib-im2dhist-$GOOS-$GOARCH.dll
 go build -o compiled-libs/lib-im2dhist-$GOOS-$GOARCH.dll -buildmode=c-shared lib-im2dhist.go &&
     echo Done
-export CC=
 echo
 
-export CC=i686-w64-mingw32-gcc
 export GOARCH=386
 echo Building lib-im2dhist-$GOOS-$GOARCH.dll
 go build -o compiled-libs/lib-im2dhist-$GOOS-$GOARCH.dll -buildmode=c-shared lib-im2dhist.go &&
     echo Done
-export CC=
 echo
 
 # macOS builds
