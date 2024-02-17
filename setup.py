@@ -1,21 +1,28 @@
 from setuptools import setup, find_packages
-import codecs
 import os
 
 parent_dir = os.path.abspath(os.path.dirname(__file__))
 
-with codecs.open(os.path.join(parent_dir, "README.md"), encoding="utf-8") as readme:
-    readme_description = "\n" + readme.read()
+def get_version():
+    with open(os.path.join(parent_dir, "src", "im2dhisteq", "__init__.py")) as f:
+        for line in f:
+            if line.startswith("__version__"):
+                return line.strip().split("=")[1].strip(" '\"")
+
+def get_readme():
+    with open(os.path.join(parent_dir, "README.md"), encoding="utf-8") as readme:
+        readme_description = "\n" + readme.read()
+        return readme_description
 
 
 setup(
     name="im2dhisteq",
-    version="1.0.12",
-    author="mamdasn s",
-    author_email="<mamdassn@gmail.com>",
+    version=get_version(),
+    author="Mamdasan Sabrian",
+    author_email="<reach.s.farhad@gmail.com>",
     url="https://github.com/Mamdasn/im2dhisteq",
     description="This module attempts to enhance contrast of a given image by equalizing its two dimensional histogram.",
-    long_description=readme_description,
+    long_description=get_readme(),
     long_description_content_type="text/markdown",
     include_package_data=True,
     package_dir={"": "src"},
